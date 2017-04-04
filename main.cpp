@@ -11,7 +11,7 @@ int main()
 	M->start();
 	while (M->set()==1)
 	{
-		M->move();
+		M->move();;
 	}
 	Sleep(3000);
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
