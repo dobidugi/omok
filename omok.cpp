@@ -6,88 +6,148 @@
 #define _X 20
 #define _Y 20 
 
-// 왼쪽 ├ 1
-// 오른쪽 ┤ 2
-// 왼쪽위 ┌ 3
-// 오른쪽위 ┐ 4
-// 맨위 ┬ 5
-// 맨아래 ┴ 6
-// 왼쪽아래 └ 7
-// 오른쪽 아래 ┘ 8
-// 가운대 ┼ 0
+// left ├ 1
+// right ┤ 2
+// left_up ┌ 3
+// right_up ┐ 4
+// up ┬ 5
+// down ┴ 6
+// left_down └ 7
+// right_down ┘ 8
+// center	 ┼ 0
 
+
+// ○ black 8
+// ● white 9
 bool Omok::check_win()
 {
+	int b_cnt = 0;
+	int w_cnt = 0;
+	for (int i = y; i < y+5; i++)
+	{
+		if (arr[i][x] == 8)	b_cnt++;
+		if (arr[i][x] == 9)	w_cnt++;
+	} // over_length check
+	
 
-	return 0;
+	if(b_cnt==5) return 0;
+	if(w_cnt==5) return 1;
+
+
 }
 
-void Omok::gotoxy(int g_x)
+bool Omok::set()
+{
+	return game;
+}
+void Omok::gotoxy(int g_x,int g_y)
 {
 	COORD Pos;
 	Pos.X = g_x;
-	Pos.Y = y;
+	Pos.Y = g_y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
-void Omok::point()
+void Omok::move()
 {
 	int key;
 	key = getch();
-	switch (key)
+	if (key == 224)
 	{
-	case 75: // left
-		if (x > 0)
+		key = getch();
+		switch (key)
 		{
-			if (arr[y][x - 1] == 0)
+		
+
+		case 75: // left move
+			if (x > 0)
 			{
-				x -= 1;
-				gotoxy(x * 2);
-				test();
-				std::cout << y << x;
-	
+				if (arr[y][x - 1] == 0)
+				{
+					x -= 1;
+					gotoxy(x * 2,y);
+				}
 			}
-		}
 			break;
-		case 77: // right
+		case 77: // right move 
 			if (x < 19)
 			{
 				x += 1;
-				gotoxy(x * 2);
-				test();
-				std::cout << y << x;
+				gotoxy(x * 2,y);
 			}
 			break;
-		case 72: // up
+		case 72: // up move 
 			if (y > 0)
 			{
 				y -= 1;
-				gotoxy(x);
+				gotoxy(x*2,y);
 			}
 			break;
 
-		case 80: // down
+		case 80: // down move 
 			if (y < 19)
 			{
 				y += 1;
-				gotoxy(x);
+				gotoxy(x*2,y);
+
+			}
+			break;
+		case 79: // push spacebar
+			if (arr[y][x] != 0)
+			{
+				msg(3);
+			}
+			else if (arr[y][x] == 0)
+			{
+				if (turn == false)
+				{
+					arr[y][x] = 8;
+					std::cout << "○"; // black
+					turn = true;	
+					gotoxy(x*2,y);
+					msg(check_win());
+				}
+				else if (turn == true)
+				{
+					arr[y][x] = 9;
+					std::cout << "●"; // whtie
+					turn = false;
+					gotoxy(x*2,y);
+					msg(check_win());
+				}
 			}
 			break;
 		}
-
+	}
 
 
 }
-void Omok::test()
+void Omok::msg(int i=0)
 {
 	COORD Pos;
 	Pos.X = 0;
-	Pos.Y = 22;
+	Pos.Y = 20;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+	if (i == 0)
+	{
+		std::cout << "○ winner!";
+		game = 0;
+	}
+	else if(i == 1)
+	{
+		std::cout << "● winner!";
+		game = 0;
+	}
+	else if (i == 3)
+	{
+		std::cout << "You can`t locate the rock here";
+		Sleep(1000);
+		msg();
+		std::cout << "                              ";
+	}
 
 }
 void Omok::start()
 {
-	
 	for (int i = 0; i < _Y; i++)
 	{
 		for (int j = 0; j < _X; j++)
@@ -131,6 +191,6 @@ void Omok::start()
 				break;
 			}
 		}
-		std::cout << "" << std::endl;
+		std::cout << " " << std::endl;
 	}
 }

@@ -5,6 +5,7 @@
 class Omok{
 private:
 	bool turn = 0;
+	bool game = 1;
 	int x = 9;
 	int y = 9;
 	int arr[_Y][_X] =
@@ -30,16 +31,12 @@ private:
 		{ 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2 },
 		{ 7,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,8 },
 	};
-	void gotoxy(int g_x);
-
-	void test();
-	
+	void gotoxy(int g_x,int g_y);
+	void msg(int i);
 public:
-	bool check_win(); // 승리확인
-	void point(); // 방향이동
+	bool check_win(); // cehck_winner
+	void move(); // move key
 	void start();
-
-
+	bool set();
 };
-
 #endif
