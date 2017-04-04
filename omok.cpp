@@ -56,132 +56,22 @@ bool Omok::check_win()
 			}
 		}
 	} // width_check finish
-
-	for (int i = 0; i < 20; i++) //left_cross_check start
+	
+	for (int i = 0; i < 20; i++) //reverse_cross_check start
 	{
 		for (int j = 0; j < 20; j++)
 		{
-			if ((arr[i][j] == 8) && (arr[i+1][j + 1] == 8) && (arr[i+2][j + 2] == 8) && (arr[i+3][j + 3] == 8) && (arr[i+4][j + 4] == 8))
+			if ((arr[i][j] == 8) && (arr[i-1][j +1] == 8) && (arr[i-2][j + 2] == 8) && (arr[i-3][j +3] == 8) && (arr[i-4][j +4] == 8))
 			{
 				return 0;
 			}
-			else if ((arr[i][j] == 9) && (arr[i+1][j + 1] == 9) && (arr[i+2][j + 2] == 9) && (arr[i+3][j + 3] == 9) && (arr[i+4][j + 4] == 9))
+			else if ((arr[i][j] == 9) && (arr[i-1][j + 1] == 9) && (arr[i-2][j + 2] == 9) && (arr[i-3][j + 3] == 9) && (arr[i-4][j + 4] == 9))
 			{
 				return 1;
 			}
 		}
-	} //left_cross_check finish
-
-	for (int i = 0; i < 20; i++) //left_cross_check start
-	{
-		for (int j = 0; j < 20; j++)
-		{
-			if ((arr[i][j] == 8) && (arr[i-1][j-1]==8) && (arr[i-2][j-2] == 8) && (arr[i-3][j-3]== 8)&& (arr[i-4][j-4] ==8))
-			{
-				return 0;
-			}
-		}
-	}
-	/*
-	for (int i = 0; i < 20; i++) //length_check start
-	{
-		for (int j = 0; j < 20; j++)
-		{
-			if (arr[i][j] == 8) b_cnt++;
-			if (b_cnt == 5) return 0;
-			if (arr[i][j] == 9) w_cnt++;
-			if (w_cnt == 5) return 1;
-		}
-		b_cnt = 0;
-		w_cnt = 0;
-	}
-	b_cnt = 0;
-	w_cnt = 0;//length_check finish
+	} //reverse_cross_check finish
 	
-	for (int i = 0; i < 20; i++) // width_check start
-	{
-		for (int j = 0; j < 20; j++)
-		{
-			if (arr[j][i] == 8) b_cnt++;
-			if (b_cnt == 5) return 0;
-			if (arr[j][i] == 9) w_cnt++;
-			if (w_cnt == 5) return 1;
-		}
-		b_cnt = 0;
-		w_cnt = 0;
-	}
-	b_cnt = 0;
-	w_cnt = 0;
-	// length_check
-	/* trash_code
-	for (int i = y; i < y+5; i++)
-	{
-		if (arr[i][x] == 8)	b_cnt++;
-		if (arr[i][x] == 9)	w_cnt++;
-	} // over_length check
-	if (b_cnt == 5) return 0;
-	if (w_cnt == 5) return 1;
-	b_cnt = 0;
-	w_cnt = 0;
-	
-	for (int i = y; i > y - 5; i--)
-	{
-		if (arr[i][x] == 8)	b_cnt++;
-		if (arr[i][x] == 9)	w_cnt++;
-	} // down_length check
-	if (b_cnt == 5) return 0;
-	if (w_cnt == 5) return 1;
-	b_cnt = 0;
-	w_cnt = 0;
-	
-	for (int i = x; i < x+5; i++)
-	{
-		if (arr[y][i] == 8)	b_cnt++;
-		if (arr[y][i] == 9)	w_cnt++;
-	} // left_width_check
-	if (b_cnt == 5) return 0;
-	if (w_cnt == 5) return 1;
-	b_cnt = 0;
-	w_cnt = 0;
-
-	for (int i = x; i > x - 5; i--)
-	{
-		if (arr[y][i] == 8)	b_cnt++;
-		if (arr[y][i] == 9)	w_cnt++;
-	} // right_width_check
-	if (b_cnt == 5) return 0;
-	if (w_cnt == 5) return 1;
-	b_cnt = 0;
-	w_cnt = 0;	
-
-	
-	for (int i = y; i < y + 5; i++)
-	{
-		for (int j = 0; j < 5; j++)
-		{
-			if (arr[i][x+j] == 8) b_cnt++;
-			if (arr[i][x+j] == 9) w_cnt++;
-		}
-	} // reverse_corss_check  ¡¬
-	if (b_cnt == 5) return 0;
-	if (w_cnt == 5) return 1;
-	b_cnt = 0;
-	w_cnt = 0;
-
-	for (int i = y; i > y - 5; i--)
-	{
-		for (int j = x; j > x - 5; j--)
-		{
-			if (arr[i][j] == 8) b_cnt++;
-			if (arr[i][j] == 9) w_cnt++;
-		}
-	} // reverse_corss_check  ¡¬
-	if (b_cnt == 5) return 0;
-	if (w_cnt == 5) return 1;
-	b_cnt = 0;
-	w_cnt = 0;
-
-	*/
 }
 
 bool Omok::set()
@@ -250,6 +140,9 @@ void Omok::move()
 					turn = true;	
 					gotoxy(x*2,y);
 					msg(check_win());
+					gotoxy(40,0);
+					std::cout << "Turn : ¡Ü" << std::endl;
+					gotoxy(x*2, y);
 				}
 				else if (turn == true)
 				{
@@ -258,6 +151,9 @@ void Omok::move()
 					turn = false;
 					gotoxy(x*2,y);
 					msg(check_win());
+					gotoxy(40, 0);
+					std::cout << "Turn : ¡Û" << std::endl;
+					gotoxy(x*2, y);
 				}
 			}
 			break;
@@ -274,12 +170,12 @@ void Omok::msg(int i)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 	if (i == 0)
 	{
-		std::cout << "¡Û winner!";
+		std::cout << " ¡Û Win!";
 		game = 0;
 	}
 	else if(i == 1)
 	{
-		std::cout << "¡Ü winner!";
+		std::cout << " ¡Ü Win!";
 		game = 0;
 	}
 	else if (i == 3)
@@ -340,4 +236,6 @@ void Omok::start()
 		}
 		std::cout << " " << std::endl;
 	}
+	gotoxy(40, 0);
+	std::cout << "Turn : ¡Û" << std::endl;
 }
