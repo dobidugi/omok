@@ -23,17 +23,165 @@ bool Omok::check_win()
 {
 	int b_cnt = 0;
 	int w_cnt = 0;
+	int cnt = 1;
+
+	for (int i = 0; i < 20; i++) //length_check start
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			if ((arr[i][j] == 8) && (arr[i][j+1]==8) && (arr[i][j+2] ==8) && (arr[i][j+3]==8) && (arr[i][j+4]==8))
+			{
+				return 0;
+			}
+			else if ((arr[i][j] == 9) && (arr[i][j + 1] == 9) && (arr[i][j + 2] == 9) && (arr[i][j + 3] == 9) && (arr[i][j + 4] ==9))
+			{
+				return 1;
+			}
+		}
+	} //length_check finish
+
+	for (int i = 0; i < 20; i++) // width_check start
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			if ((arr[j][i] == 8) && (arr[j + 1][i] == 8) && (arr[j + 2][i] == 8) && (arr[j + 3][i] == 8) && (arr[j + 4][i] == 8))
+			{
+
+				return 0;
+			}
+			if ((arr[j][i] == 9) && (arr[j + 1][i] == 9) && (arr[j + 2][i] == 9) && (arr[j + 3][i] == 9) && (arr[j + 4][i] == 9))
+			{
+
+				return 1;
+			}
+		}
+	} // width_check finish
+
+	for (int i = 0; i < 20; i++) //left_cross_check start
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			if ((arr[i][j] == 8) && (arr[i+1][j + 1] == 8) && (arr[i+2][j + 2] == 8) && (arr[i+3][j + 3] == 8) && (arr[i+4][j + 4] == 8))
+			{
+				return 0;
+			}
+			else if ((arr[i][j] == 9) && (arr[i+1][j + 1] == 9) && (arr[i+2][j + 2] == 9) && (arr[i+3][j + 3] == 9) && (arr[i+4][j + 4] == 9))
+			{
+				return 1;
+			}
+		}
+	} //left_cross_check finish
+
+	for (int i = 0; i < 20; i++) //left_cross_check start
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			if ((arr[i][j] == 8) && (arr[i-1][j-1]==8) && (arr[i-2][j-2] == 8) && (arr[i-3][j-3]== 8)&& (arr[i-4][j-4] ==8))
+			{
+				return 0;
+			}
+		}
+	}
+	/*
+	for (int i = 0; i < 20; i++) //length_check start
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			if (arr[i][j] == 8) b_cnt++;
+			if (b_cnt == 5) return 0;
+			if (arr[i][j] == 9) w_cnt++;
+			if (w_cnt == 5) return 1;
+		}
+		b_cnt = 0;
+		w_cnt = 0;
+	}
+	b_cnt = 0;
+	w_cnt = 0;//length_check finish
+	
+	for (int i = 0; i < 20; i++) // width_check start
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			if (arr[j][i] == 8) b_cnt++;
+			if (b_cnt == 5) return 0;
+			if (arr[j][i] == 9) w_cnt++;
+			if (w_cnt == 5) return 1;
+		}
+		b_cnt = 0;
+		w_cnt = 0;
+	}
+	b_cnt = 0;
+	w_cnt = 0;
+	// length_check
+	/* trash_code
 	for (int i = y; i < y+5; i++)
 	{
 		if (arr[i][x] == 8)	b_cnt++;
 		if (arr[i][x] == 9)	w_cnt++;
 	} // over_length check
+	if (b_cnt == 5) return 0;
+	if (w_cnt == 5) return 1;
+	b_cnt = 0;
+	w_cnt = 0;
 	
+	for (int i = y; i > y - 5; i--)
+	{
+		if (arr[i][x] == 8)	b_cnt++;
+		if (arr[i][x] == 9)	w_cnt++;
+	} // down_length check
+	if (b_cnt == 5) return 0;
+	if (w_cnt == 5) return 1;
+	b_cnt = 0;
+	w_cnt = 0;
+	
+	for (int i = x; i < x+5; i++)
+	{
+		if (arr[y][i] == 8)	b_cnt++;
+		if (arr[y][i] == 9)	w_cnt++;
+	} // left_width_check
+	if (b_cnt == 5) return 0;
+	if (w_cnt == 5) return 1;
+	b_cnt = 0;
+	w_cnt = 0;
 
-	if(b_cnt==5) return 0;
-	if(w_cnt==5) return 1;
+	for (int i = x; i > x - 5; i--)
+	{
+		if (arr[y][i] == 8)	b_cnt++;
+		if (arr[y][i] == 9)	w_cnt++;
+	} // right_width_check
+	if (b_cnt == 5) return 0;
+	if (w_cnt == 5) return 1;
+	b_cnt = 0;
+	w_cnt = 0;	
 
+	
+	for (int i = y; i < y + 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			if (arr[i][x+j] == 8) b_cnt++;
+			if (arr[i][x+j] == 9) w_cnt++;
+		}
+	} // reverse_corss_check  ¡¬
+	if (b_cnt == 5) return 0;
+	if (w_cnt == 5) return 1;
+	b_cnt = 0;
+	w_cnt = 0;
 
+	for (int i = y; i > y - 5; i--)
+	{
+		for (int j = x; j > x - 5; j--)
+		{
+			if (arr[i][j] == 8) b_cnt++;
+			if (arr[i][j] == 9) w_cnt++;
+		}
+	} // reverse_corss_check  ¡¬
+	if (b_cnt == 5) return 0;
+	if (w_cnt == 5) return 1;
+	b_cnt = 0;
+	w_cnt = 0;
+
+	*/
 }
 
 bool Omok::set()
@@ -60,12 +208,9 @@ void Omok::move()
 
 		case 75: // left move
 			if (x > 0)
-			{
-				if (arr[y][x - 1] == 0)
-				{
-					x -= 1;
-					gotoxy(x * 2,y);
-				}
+			{	
+				x -= 1;
+				gotoxy(x * 2,y);
 			}
 			break;
 		case 77: // right move 
@@ -121,7 +266,7 @@ void Omok::move()
 
 
 }
-void Omok::msg(int i=0)
+void Omok::msg(int i)
 {
 	COORD Pos;
 	Pos.X = 0;
@@ -141,7 +286,9 @@ void Omok::msg(int i=0)
 	{
 		std::cout << "You can`t locate the rock here";
 		Sleep(1000);
-		msg();
+		Pos.X = 0;
+		Pos.Y = 20;
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 		std::cout << "                              ";
 	}
 

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <Windows.h>
 #include "omok.h"
 
 
@@ -10,5 +11,6 @@ int main()
 	{
 		M->move();
 	}
+	Sleep(3000);
 	delete M;
 }
