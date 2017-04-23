@@ -1,26 +1,27 @@
 #include <iostream>
 #include <Windows.h>
-//#include "board.h"
-#include "omok.h"
+#include "Board.h"
+#include "player.h"
+#include "Judge.h"
 
 int main()
 {
-	COORD Pos;
-	Pos.X = 0;
-	Pos.Y = 22;
-	int getx, gety;
-	std::cout << "input widthsize : ";
-	std::cin >> getx; 
-	std::cout << "input heightsize : ";
-	std::cin >> gety;
-	Omok *M = new Omok(getx, gety);
-	//M->start();
-	while (M->set()==1)
+	int set_width;
+	int set_height;
+	bool loop = true;
+	std::cout << "input width : ";
+	std::cin >> set_width;
+	std::cout << "input height : ";
+	std::cin >> set_height;
+	Board *B = new Board(set_width, set_height);
+	Player *P = new Player(set_width, set_height);
+	Judge *J = new Judge(set_width, set_height);
+	while (J->play() == true && loop == true) // 게임상태
 	{
-		M->move();
+		while (1)
+		{
+			if (9 == P->move()) break; 
+		}		
+		loop = J->push_check(P->GetY(), P->GetX());
 	}
-	Sleep(3000);
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
-	delete M;
-	
 }
