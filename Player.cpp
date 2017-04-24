@@ -10,7 +10,6 @@ Player::Player(int width, int height) : x(width), y(height), loop_x(width), loop
 	y = width / 2;
 }
 
-
 int Player::move()
 {
 	int key;

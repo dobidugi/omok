@@ -4,15 +4,15 @@
 
 Judge::Judge(int _width, int _hegiht) : width(_width), height(_hegiht) 
 {
-	map.assign(height, std::vector<int>(width, 0));
+
 }
 
 
-bool Judge::push_check(int check_y, int check_x)
+bool Judge::push_check(int value)
 {
-	if (map[check_y][check_x] == 0)
+	if (value == 0)
 	{
-		push(check_y, check_x);
+		//push(check_y, check_x);
 		return true;
 	}
 	else
@@ -28,25 +28,9 @@ bool Judge::push_check(int check_y, int check_x)
 	}
 }
 
-void Judge::push(int y,int x)
-{
-	if (turn == false)
-	{
-		map[y][x] = 8;
-		std::cout << "¡Û"; // black
-		turn = true;
-		msg(win_check());
-	}
-	else if (turn == true)
-	{
-		map[y][x] = 9;
-		std::cout << "¡Ü"; // whtie
-		turn = false;
-		msg(win_check());
-	}
-}
 
-bool Judge::win_check()
+
+bool Judge::win_check(std::vector<std::vector<int>> map)
 {
 	int b_cnt = 0;
 	int w_cnt = 0;

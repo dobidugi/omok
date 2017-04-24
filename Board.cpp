@@ -5,7 +5,8 @@
 Board::Board(int _width, int _hegiht) : width(_width) , height(_hegiht)
 {
 	system("cls");
-	Board::drawMap();
+	map.assign(height, std::vector<int>(width, 0));
+	Board::drawMap(); 
 }
 
 
@@ -39,5 +40,26 @@ void Board::drawMap()
 		}
 	}
 
+}
+
+void Board::Pushcheck(Judge *J ,int y ,int x)
+{
+	if (true == J->push_check(map[y][x]))
+	{
+		if (false == J->turn)
+		{
+			map[y][x] = 8;
+			J->turn = true;
+			std::cout << "¡Û"; // black
+			J->msg(J->win_check(map));
+		}
+		else if (true == J->turn)
+		{
+			map[y][x] = 9;
+			J->turn = false;
+			std::cout << "¡Ü"; // white
+			J->msg(J->win_check(map));
+		}
+	}
 }
 
