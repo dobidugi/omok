@@ -9,6 +9,10 @@ class Player
 	int loop_y;
 	//bool push = TRUE;
 	void gotoxy(int get_x, int get_y);
+	void MoveLeft();
+	void MoveRight();
+	void MoveUp();
+	void MoveDown();
 public:
 	Player(int width,int height);
 	int move();

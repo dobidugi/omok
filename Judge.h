@@ -6,16 +6,19 @@ class Judge
 private:
 	int width;
 	int height;
-	bool game = true;
 	std::vector<std::vector<int>> map;
+	bool game = true;
+	bool WidthCheck(int value);
+	bool HeightCheck(int value);
+	bool CrossCheck(int value);
+	bool RcrossCheck(int value);
+	void msg();
 public:
 	bool turn = false;
 	Judge(int width, int height);
+	~Judge();
 	bool push_check(int value);
-	bool win_check(std::vector<std::vector<int>> map);
-	void msg(bool A);
+	void win_check(std::vector<std::vector<int>> copy_map);
 	bool play();
 };
-
-
 #endif

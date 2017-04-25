@@ -16,35 +16,19 @@ int Player::move()
 	key = getch();
 	switch (key)
 	{
+		key = getch();
 	case 75: // left move
-		if (x > 0)
-		{
-			x -= 1;
-			gotoxy(x * 2, y);
-		}
+		if (x > 0) MoveLeft();
 		break;
 	case 77: // right move 
-		if (x < loop_x - 1)
-		{
-			x += 1;
-			gotoxy(x * 2, y);
-		}
+		if (x < loop_x - 1) MoveRight();
 		break;
 	case 72: // up move 
-		if (y > 0)
-		{
-			y -= 1;
-			gotoxy(x * 2, y);
-		}
+		if (y > 0) MoveUp();
 		break;
 
 	case 80: // down move 
-		if (y < loop_y - 1)
-		{
-			y += 1;
-			gotoxy(x * 2, y);
-
-		}
+		if (y < loop_y - 1) MoveDown();
 		break;
 	case 79: // push spacebar
 		return 9;
@@ -68,4 +52,28 @@ void Player::gotoxy(int get_x, int get_y)
 	Point.X = get_x;
 	Point.Y = get_y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Point);
+}
+
+void Player::MoveLeft()
+{
+	x -= 1;
+	gotoxy(x * 2, y);
+}
+
+void Player::MoveRight()
+{
+	x += 1;
+	gotoxy(x * 2, y);
+}
+
+void Player::MoveUp()
+{
+	y -= 1;
+	gotoxy(x * 2, y);
+}
+
+void Player::MoveDown()
+{
+	y += 1;
+	gotoxy(x * 2, y);
 }
