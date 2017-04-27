@@ -23,4 +23,7 @@ int main()
 		}		
 		B->Pushcheck(J,P->GetY(),P->GetX());
 	}
+	delete B;
+	delete P;
+	delete J;
 }
